@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SnakeActivity.class);
-                startActivity(intent);
+                Intent snake = new Intent(MainActivity.this, SnakeActivity.class);
+                startActivity(snake);
             }
         });
 
@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         btnScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HighScoreActivity.class);
-                startActivity(intent);
+                Intent score = new Intent(MainActivity.this, HighScoreActivity.class);
+                startActivity(score);
             }
         });
 
@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SnakeActivity.class);
-                startActivity(intent);
+                Intent about = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(about);
             }
         });
 
