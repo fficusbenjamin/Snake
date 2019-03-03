@@ -9,7 +9,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
 
-    private Button btnPlay;
+    private Button btnPlay, btnScore, btnAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,24 @@ public class MainActivity extends AppCompatActivity {
 
         btnPlay = (Button) findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SnakeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnScore = (Button) findViewById(R.id.btnScore);
+        btnScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HighScoreActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnAbout = (Button) findViewById(R.id.btnAbout);
+        btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SnakeActivity.class);

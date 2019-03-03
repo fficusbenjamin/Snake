@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Snake</string>
+    <string name="about">About</string>
+    <string name="highscores">Highscores</string>
+    <string name="play">Play!</string>
+
+    <string name="title_activity_high_score">HighScoreActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
