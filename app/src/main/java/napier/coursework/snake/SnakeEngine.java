@@ -45,14 +45,20 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
     // Control pausing between updates
     private long nextFrameTime;
-    // Update the game 20 times per second
-    private final long FPS = 20;
-    // There are 2000 milliseconds in a second
-    private final long MILLIS_PER_SECOND = 2000;
+    // Update the game 60 times per second
+    private final long FPS = 60;
+    // There are 6000 milliseconds in a second
+    private final long MILLIS_PER_SECOND = 6000;
     // We will draw the frame much more often
 
     // How many points does the player have
-    private int score;
+    public static int score;
+
+    public static int getPlayerScore(){
+        return score;
+    }
+
+
 
     // The location in the grid of all the segments
     private int[] snakeXs;
