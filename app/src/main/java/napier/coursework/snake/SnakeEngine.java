@@ -234,8 +234,8 @@ class SnakeEngine extends SurfaceView implements Runnable {
             // Fill the screen with black background
             canvas.drawColor(Color.BLACK);
 
-            // Set the color of the paint to draw the snake white
-            paint.setColor(Color.WHITE);
+            // Set the color of the paint to draw the snake green
+            paint.setColor(Color.GREEN);
 
             // Scale the HUD text
             paint.setTextSize(50);
