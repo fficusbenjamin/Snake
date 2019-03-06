@@ -48,7 +48,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
     // Update the game 60 times per second
     private final long FPS = 60;
     // There are 6000 milliseconds in a second
-    private final long MILLIS_PER_SECOND = 6000;
+    private long MILLIS_PER_SECOND = 6000;
     // We will draw the frame much more often
 
     // How many points does the player have
@@ -158,6 +158,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
         spawnBob();
         //add to the score
         score = score + 1;
+        MILLIS_PER_SECOND = MILLIS_PER_SECOND - 100;
     }
 
     private void moveSnake(){
@@ -238,7 +239,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
             paint.setColor(Color.GREEN);
 
             // Scale the HUD text
-            paint.setTextSize(50);
+            paint.setTextSize(100);
             canvas.drawText("Score:" + score, 10, 70, paint);
 
             // Draw the snake one block at a time
