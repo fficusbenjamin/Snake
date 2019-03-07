@@ -14,6 +14,7 @@ public class SnakeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         // Get the pixel dimensions of the screen
         Display display = getWindowManager().getDefaultDisplay();
 
@@ -26,6 +27,7 @@ public class SnakeActivity extends Activity {
 
         // Make snakeEngine the view of the Activity
         setContentView(snakeEngine);
+
     }
 
     // Start the thread in snakeEngine

@@ -2,23 +2,23 @@ package napier.coursework.snake;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
+
 
 public class HighScoreActivity extends AppCompatActivity {
 
-
-
     public static int highScore, playerScore;
     String scoreAsString = Integer.toString(playerScore);
-    String highScoreAsString = Integer.toString(highScore);
+    public static String highScoreAsString = Integer.toString(highScore);
 
 
     public static void SetHighScore(){
         playerScore = SnakeEngine.getPlayerScore();
 
+
         if (playerScore > highScore) {
             highScore = playerScore;
+
         }
     }
 
@@ -30,15 +30,6 @@ public class HighScoreActivity extends AppCompatActivity {
         TextView txtHighScoreView = findViewById(R.id.txtHighScoreView);
         txtScoreView.setText(scoreAsString);
         txtHighScoreView.setText(highScoreAsString);
-
-
-
-
-
-
-
-
-
     }
 
 }

@@ -1,7 +1,10 @@
 package napier.coursework.snake;
 
+
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -9,6 +12,7 @@ import java.util.Random;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+
 
 
 class SnakeEngine extends SurfaceView implements Runnable {
@@ -54,6 +58,9 @@ class SnakeEngine extends SurfaceView implements Runnable {
     // How many points does the player have
     public static int score;
 
+    public static boolean dead;
+    public static boolean getDeath(){return dead;}
+
     public static int getPlayerScore(){
         return score;
     }
@@ -94,7 +101,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
         surfaceHolder = getHolder();
         paint = new Paint();
 
-        // If you score 200 you are rewarded with a crash achievement!
+        // If you Score 200 you are rewarded with a crash achievement!
         snakeXs = new int[200];
         snakeYs = new int[200];
 
@@ -138,7 +145,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
         // Get Bob ready for dinner
         spawnBob();
 
-        // Reset the score
+        // Reset the Score
         score = 0;
 
         // Setup nextFrameTime so an update is triggered
@@ -156,7 +163,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
         snakeLength++;
         //replace Bob
         spawnBob();
-        //add to the score
+        //add to the Score
         score = score + 1;
         MILLIS_PER_SECOND = MILLIS_PER_SECOND - 100;
 
@@ -194,9 +201,9 @@ class SnakeEngine extends SurfaceView implements Runnable {
         }
     }
 
-    private boolean detectDeath(){
+    boolean detectDeath(){
         // Has the snake died?
-        boolean dead = false;
+        //boolean dead = false;
 
         // Hit the screen edge
         if (snakeXs[0] == -1) dead = true;
@@ -208,6 +215,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
         for (int i = snakeLength - 1; i > 0; i--) {
             if ((i > 4) && (snakeXs[0] == snakeXs[i]) && (snakeYs[0] == snakeYs[i])) {
                 dead = true;
+
             }
         }
 
@@ -225,7 +233,6 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
         if (detectDeath()) {
             //start again
-            HighScoreActivity.SetHighScore();
             newGame();
         }
     }
