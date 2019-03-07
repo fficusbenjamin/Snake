@@ -159,6 +159,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
         //add to the score
         score = score + 1;
         MILLIS_PER_SECOND = MILLIS_PER_SECOND - 100;
+
     }
 
     private void moveSnake(){
@@ -211,6 +212,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
         }
 
         return dead;
+
     }
 
     public void update() {
@@ -223,6 +225,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
         if (detectDeath()) {
             //start again
+            HighScoreActivity.SetHighScore();
             newGame();
         }
     }
