@@ -40,7 +40,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
     private int blockSize;
 
     // The size in segments of the playable area
-    private final int NUM_BLOCKS_WIDE = 40;
+    private final int NUM_BLOCKS_WIDE = 20;
     private int numBlocksHigh;
 
     // Control pausing between updates
@@ -48,7 +48,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
     // Update the game 60 times per second
     private final long FPS = 60;
     // There are 6000 milliseconds in a second
-    private long MILLIS_PER_SECOND = 6000;
+    private long MILLIS_PER_SECOND = 10000;
     // We will draw the frame much more often
 
     // How many points does the player have
