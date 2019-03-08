@@ -43,13 +43,10 @@ public class SnakeActivity extends Activity {
     protected void onPause() {
         super.onPause();
         snakeEngine.pause();
-        //Intent score = new Intent(SnakeActivity.this, Score.class);
-        //startActivity(score);
     }
 
     @Override
     public void onBackPressed() {
-
         Intent snake = new Intent(SnakeActivity.this, MainActivity.class);
         startActivity(snake);
     }
