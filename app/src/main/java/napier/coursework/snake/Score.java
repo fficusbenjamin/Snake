@@ -41,6 +41,15 @@ public class Score extends AppCompatActivity {
     }
 
     public void tryAgain(View view){
+        finish();
         startActivity(new Intent(getApplicationContext(), SnakeActivity.class));
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent snake = new Intent(Score.this, MainActivity.class);
+        startActivity(snake);
     }
 }
