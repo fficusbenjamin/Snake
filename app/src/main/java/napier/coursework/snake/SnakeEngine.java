@@ -1,7 +1,9 @@
 package napier.coursework.snake;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -51,14 +53,13 @@ class SnakeEngine extends SurfaceView implements Runnable {
     // We will draw the frame much more often
 
     // How many points does the player have
-    public static int score;
-
-
-
+    private static int score;
 
     public static int getPlayerScore(){
         return score;
     }
+
+
 
 
 
@@ -136,6 +137,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
         snakeLength = 1;
         snakeXs[0] = NUM_BLOCKS_WIDE / 2;
         snakeYs[0] = numBlocksHigh / 2;
+        MILLIS_PER_SECOND = 10000;
 
         // Get Bob ready for dinner
         spawnBob();
@@ -160,7 +162,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
         spawnBob();
         //add to the Score
         score = score + 1;
-        MILLIS_PER_SECOND = MILLIS_PER_SECOND - 100;
+        MILLIS_PER_SECOND = MILLIS_PER_SECOND - 200;
 
     }
 
@@ -227,8 +229,19 @@ class SnakeEngine extends SurfaceView implements Runnable {
         moveSnake();
 
         if (detectDeath()) {
+
+
+            Intent i = new Intent().setClass(getContext(), Score.class);
+            ((Activity) getContext()).startActivity(i);
+
+
+
+
+            //pause();
             //start again
-            newGame();
+            //newGame();
+
+
         }
     }
 

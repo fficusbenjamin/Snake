@@ -1,6 +1,7 @@
 package napier.coursework.snake;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
@@ -42,7 +43,10 @@ public class SnakeActivity extends Activity {
     protected void onPause() {
         super.onPause();
         snakeEngine.pause();
+        Intent score = new Intent(SnakeActivity.this, Score.class);
+        startActivity(score);
     }
+
 
 
 }
