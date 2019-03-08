@@ -2,9 +2,7 @@ package napier.coursework.snake;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Point;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -19,9 +17,6 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
     // Our game thread for the main game loop
     private Thread thread = null;
-
-    // To hold a reference to the Activity
-    private Context context;
 
     // For tracking movement Heading
     public enum Heading {UP, RIGHT, DOWN, LEFT}
@@ -58,8 +53,8 @@ class SnakeEngine extends SurfaceView implements Runnable {
     // How many points does the player have
     public static int score;
 
-    public static boolean dead;
-    public static boolean getDeath(){return dead;}
+
+
 
     public static int getPlayerScore(){
         return score;
@@ -203,7 +198,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
     boolean detectDeath(){
         // Has the snake died?
-        //boolean dead = false;
+        boolean dead = false;
 
         // Hit the screen edge
         if (snakeXs[0] == -1) dead = true;
