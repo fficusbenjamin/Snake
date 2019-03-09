@@ -46,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(about);
             }
         });
+    }
 
 
+    @Override
+    public void onBackPressed() {
 
-
-
-
-
-
+        Intent snake = new Intent(MainActivity.this, MainActivity.class);
+        startActivity(snake);
     }
 }

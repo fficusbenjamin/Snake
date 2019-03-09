@@ -46,6 +46,11 @@ public class Score extends AppCompatActivity {
 
     }
 
+    public void mainMenu(View view){
+        finish();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+    }
+
     @Override
     public void onBackPressed() {
 
