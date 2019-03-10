@@ -6,10 +6,15 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 
+
 public class SnakeActivity extends Activity {
 
     // Declare an instance of SnakeEngine
     SnakeEngine snakeEngine;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +23,10 @@ public class SnakeActivity extends Activity {
 
         // Get the pixel dimensions of the screen
         Display display = getWindowManager().getDefaultDisplay();
+
+
+        //vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        //vibrator.vibrate(50);
 
         // Initialize the result into a Point object
         Point size = new Point();
@@ -29,7 +38,12 @@ public class SnakeActivity extends Activity {
         // Make snakeEngine the view of the Activity
         setContentView(snakeEngine);
 
+
+
+
     }
+
+
 
     // Start the thread in snakeEngine
     @Override

@@ -1,7 +1,6 @@
 package napier.coursework.snake;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
@@ -12,7 +11,6 @@ import java.util.Random;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-
 
 
 class SnakeEngine extends SurfaceView implements Runnable {
@@ -63,6 +61,13 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
 
 
+
+
+
+
+
+
+
     // The location in the grid of all the segments
     private int[] snakeXs;
     private int[] snakeYs;
@@ -82,6 +87,9 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
     public SnakeEngine(Context context, Point size) {
         super(context);
+
+
+
 
         context = context;
 
@@ -103,6 +111,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
         // Start the game
         newGame();
+
     }
 
     @Override
@@ -113,9 +122,11 @@ class SnakeEngine extends SurfaceView implements Runnable {
             if(updateRequired()) {
                 update();
                 draw();
+
             }
         }
     }
+
 
     public void pause() {
         isPlaying = false;
@@ -155,9 +166,14 @@ class SnakeEngine extends SurfaceView implements Runnable {
         bobY = random.nextInt(numBlocksHigh - 1) + 1;
     }
 
-    private void eatBob() {
+    public void eatBob() {
+
+
         // Increase the size of the snake
         snakeLength++;
+        //vibrate short
+        vibrClass.vibrateBob(getContext());
+
         //replace Bob
         spawnBob();
         //add to the Score
@@ -230,18 +246,9 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
         if (detectDeath()) {
 
-
             Intent i = new Intent().setClass(getContext(), Score.class);
-            ((Activity) getContext()).startActivity(i);
-
-
-
-
-            //pause();
-            //start again
-            //newGame();
-
-
+            (getContext()).startActivity(i);
+            vibrClass.vibrateDeath(getContext());
         }
     }
 
