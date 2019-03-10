@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class ScoreActivity extends AppCompatActivity {
+public class Score extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +26,14 @@ public class ScoreActivity extends AppCompatActivity {
         int highScore = settings.getInt("HIGH_SCORE", 0);
 
             if (score > highScore) {
-                highScoreLabel.setText("High ScoreActivity: " + score);
+                highScoreLabel.setText("High Score: " + score);
 
                 //save
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putInt("HIGH_SCORE", score);
                 editor.commit();
             } else {
-                highScoreLabel.setText("High ScoreActivity: " + highScore);
+                highScoreLabel.setText("High Score: " + highScore);
             }
 
     }
@@ -51,8 +51,8 @@ public class ScoreActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        Intent snake = new Intent(ScoreActivity.this, MainActivity.class);
+        finish();
+        Intent snake = new Intent(Score.this, MainActivity.class);
         startActivity(snake);
     }
 }
