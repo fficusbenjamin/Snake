@@ -8,9 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-public class Score extends AppCompatActivity {
+public class ScoreActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,20 +20,20 @@ public class Score extends AppCompatActivity {
         TextView highScoreLabel = findViewById(R.id.highScoreLabel);
 
         int score = SnakeEngine.getPlayerScore(); //getIntent().getIntExtra("SCORE", 0);
-        scoreLabel.setText(score + "");
+        scoreLabel.setText("Latest Game Score: "+score);
 
         SharedPreferences settings = getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
         int highScore = settings.getInt("HIGH_SCORE", 0);
 
             if (score > highScore) {
-                highScoreLabel.setText("High Score: " + score);
+                highScoreLabel.setText("High ScoreActivity: " + score);
 
                 //save
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putInt("HIGH_SCORE", score);
                 editor.commit();
             } else {
-                highScoreLabel.setText("High Score: " + highScore);
+                highScoreLabel.setText("High ScoreActivity: " + highScore);
             }
 
     }
@@ -54,7 +52,7 @@ public class Score extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        Intent snake = new Intent(Score.this, MainActivity.class);
+        Intent snake = new Intent(ScoreActivity.this, MainActivity.class);
         startActivity(snake);
     }
 }

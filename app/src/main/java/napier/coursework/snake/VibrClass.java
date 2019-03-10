@@ -3,7 +3,7 @@ package napier.coursework.snake;
 import android.content.Context;
 import android.os.Vibrator;
 
-public class vibrClass{
+public class VibrClass {
 
     public static void vibrateBob(Context mContext){
         Vibrator v = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);

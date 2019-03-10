@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         btnScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent score = new Intent(MainActivity.this, Score.class);
+                Intent score = new Intent(MainActivity.this, ScoreActivity.class);
                 startActivity(score);
             }
         });

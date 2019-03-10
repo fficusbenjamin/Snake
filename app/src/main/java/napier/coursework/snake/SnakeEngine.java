@@ -105,7 +105,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
         surfaceHolder = getHolder();
         paint = new Paint();
 
-        // If you Score 200 you are rewarded with a crash achievement!
+        // If you ScoreActivity 200 you are rewarded with a crash achievement!
         snakeXs = new int[200];
         snakeYs = new int[200];
 
@@ -153,7 +153,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
         // Get Bob ready for dinner
         spawnBob();
 
-        // Reset the Score
+        // Reset the ScoreActivity
         score = 0;
 
         // Setup nextFrameTime so an update is triggered
@@ -172,11 +172,11 @@ class SnakeEngine extends SurfaceView implements Runnable {
         // Increase the size of the snake
         snakeLength++;
         //vibrate short
-        vibrClass.vibrateBob(getContext());
+        VibrClass.vibrateBob(getContext());
 
         //replace Bob
         spawnBob();
-        //add to the Score
+        //add to the ScoreActivity
         score = score + 1;
         MILLIS_PER_SECOND = MILLIS_PER_SECOND - 200;
 
@@ -246,9 +246,9 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
         if (detectDeath()) {
 
-            Intent i = new Intent().setClass(getContext(), Score.class);
+            Intent i = new Intent().setClass(getContext(), ScoreActivity.class);
             (getContext()).startActivity(i);
-            vibrClass.vibrateDeath(getContext());
+            VibrClass.vibrateDeath(getContext());
         }
     }
 
@@ -265,7 +265,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
             // Scale the HUD text
             paint.setTextSize(100);
-            canvas.drawText("Score:" + score, 10, 70, paint);
+            canvas.drawText("ScoreActivity:" + score, 10, 70, paint);
 
             // Draw the snake one block at a time
             for (int i = 0; i < snakeLength; i++) {
