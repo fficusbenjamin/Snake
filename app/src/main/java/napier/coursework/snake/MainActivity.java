@@ -16,6 +16,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
+
         btnPlay = findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         btnScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent score = new Intent(MainActivity.this, HighScoreActivity.class);
+                Intent score = new Intent(MainActivity.this, Score.class);
                 startActivity(score);
             }
         });
@@ -38,17 +42,17 @@ public class MainActivity extends AppCompatActivity {
         btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent about = new Intent(MainActivity.this, AboutActivity.class);
+                Intent about = new Intent(MainActivity.this, InfoActivity.class);
                 startActivity(about);
             }
         });
+    }
 
 
+    @Override
+    public void onBackPressed() {
 
-
-
-
-
-
+        Intent snake = new Intent(MainActivity.this, MainActivity.class);
+        startActivity(snake);
     }
 }

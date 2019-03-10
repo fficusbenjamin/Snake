@@ -1,6 +1,7 @@
 package napier.coursework.snake;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
@@ -14,6 +15,7 @@ public class SnakeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         // Get the pixel dimensions of the screen
         Display display = getWindowManager().getDefaultDisplay();
 
@@ -26,6 +28,7 @@ public class SnakeActivity extends Activity {
 
         // Make snakeEngine the view of the Activity
         setContentView(snakeEngine);
+
     }
 
     // Start the thread in snakeEngine
@@ -41,6 +44,13 @@ public class SnakeActivity extends Activity {
         super.onPause();
         snakeEngine.pause();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent snake = new Intent(SnakeActivity.this, MainActivity.class);
+        startActivity(snake);
+    }
+
 
 
 }
