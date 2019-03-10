@@ -37,8 +37,7 @@
         android:textColor="#264104"/>
 
     <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+
         android:layout_marginTop="80dp"
         android:text="Try Again"
         android:textAllCaps="false"
@@ -52,8 +51,7 @@
 
 
     <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+
         android:layout_marginTop="80dp"
         android:text="Main Menu"
         android:textAllCaps="false"
