@@ -43,7 +43,10 @@
         android:text="Try Again"
         android:textAllCaps="false"
         android:onClick="tryAgain"
-        android:background="#264104"
+        android:background="@drawable/btn_rounded"
+        android:textSize="25dp"
+        android:layout_width="240dp"
+        android:layout_height="80dp"
 
         />
 
@@ -55,7 +58,10 @@
         android:text="Main Menu"
         android:textAllCaps="false"
         android:onClick="mainMenu"
-        android:background="#264104"
+        android:background="@drawable/btn_rounded"
+        android:textSize="25dp"
+        android:layout_width="240dp"
+        android:layout_height="80dp"
 
         />
 
