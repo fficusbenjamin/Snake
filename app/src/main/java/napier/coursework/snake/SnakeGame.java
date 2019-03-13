@@ -13,7 +13,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 
-class SnakeEngine extends SurfaceView implements Runnable {
+class SnakeGame extends SurfaceView implements Runnable {
 
     // Our game thread for the main game loop
     private Thread thread = null;
@@ -75,7 +75,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
     // Some paint for our canvas
     private Paint paint;
 
-    public SnakeEngine(Context context, Point size) {
+    public SnakeGame(Context context, Point size) {
         super(context);
 
 

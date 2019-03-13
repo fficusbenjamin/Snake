@@ -19,7 +19,7 @@ public class Score extends AppCompatActivity {
         TextView scoreLabel = findViewById(R.id.scoreLabel);
         TextView highScoreLabel = findViewById(R.id.highScoreLabel);
 
-        int score = SnakeEngine.getPlayerScore(); //getIntent().getIntExtra("SCORE", 0);
+        int score = SnakeGame.getPlayerScore(); //getIntent().getIntExtra("SCORE", 0);
         scoreLabel.setText("Latest Game Score: "+score);
 
         SharedPreferences settings = getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);

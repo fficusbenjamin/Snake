@@ -9,8 +9,8 @@ import android.view.Display;
 
 public class SnakeActivity extends Activity {
 
-    // Declare an instance of SnakeEngine
-    SnakeEngine snakeEngine;
+    // Declare an instance of SnakeGame
+    SnakeGame snakeGame;
 
 
     @Override
@@ -24,29 +24,29 @@ public class SnakeActivity extends Activity {
         Point size = new Point();
         display.getSize(size);
 
-        // Create a new instance of the SnakeEngine class
-        snakeEngine = new SnakeEngine(this, size);
+        // Create a new instance of the SnakeGame class
+        snakeGame = new SnakeGame(this, size);
 
-        // Make snakeEngine the view of the Activity
-        setContentView(snakeEngine);
+        // Make snakeGame the view of the Activity
+        setContentView(snakeGame);
     }
 
 
 
-    // Start the thread in snakeEngine
+    // Start the thread in snakeGame
     @Override
     protected void onResume() {
         super.onResume();
-        snakeEngine.resume();
+        snakeGame.resume();
     }
 
-    // Stop the thread in snakeEngine
+    // Stop the thread in snakeGame
     @Override
     protected void onPause() {
         super.onPause();
-        snakeEngine.pause();
+        snakeGame.pause();
     }
-    // Override the back button to go to the MainMenu
+    // Override the back button to go to the MainMenuF
     @Override
     public void onBackPressed() {
         Intent snake = new Intent(SnakeActivity.this, MainActivity.class);
