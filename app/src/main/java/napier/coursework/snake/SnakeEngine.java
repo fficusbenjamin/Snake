@@ -25,29 +25,29 @@ class SnakeEngine extends SurfaceView implements Runnable {
     private Heading heading = Heading.RIGHT;
 
     // To hold the screen size in pixels
-    private int screenX;
-    private int screenY;
+    private int sX;
+    private int sY;
 
     // How long is the snake
-    private int snakeLength;
+    private int snkLght;
 
     // Where is Bob hiding?
-    private int bobX;
-    private int bobY;
+    private int appleX;
+    private int appleY;
 
     // The size in pixels of a snake segment
-    private int blockSize;
+    private int snakeSize;
 
     // The size in segments of the playable area
-    private final int NUM_BLOCKS_WIDE = 20;
+    private final int NUM_BLOCKS_WIDE = 40;
     private int numBlocksHigh;
 
     // Control pausing between updates
     private long nextFrameTime;
     // Update the game 60 times per second
-    private final long FPS = 60;
-    // There are 6000 milliseconds in a second
-    private long MILLIS_PER_SECOND = 10000;
+    private final long FPS = 10;
+    // There are 1000 milliseconds in a second
+    private long MILLIS_PER_SECOND = 1000;
     // We will draw the frame much more often
 
     // How many points does the player have
@@ -58,19 +58,9 @@ class SnakeEngine extends SurfaceView implements Runnable {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     // The location in the grid of all the segments
-    private int[] snakeXs;
-    private int[] snakeYs;
+    private int[] snkXs;
+    private int[] snkYs;
 
     // Everything we need for drawing
     // Is the game currently playing?
@@ -91,23 +81,23 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
 
 
-        context = context;
+        //context = context;
 
-        screenX = size.x;
-        screenY = size.y;
+        sX = size.x;
+        sY = size.y;
 
         // Work out how many pixels each block is
-        blockSize = screenX / NUM_BLOCKS_WIDE;
+        snakeSize = sX / NUM_BLOCKS_WIDE;
         // How many blocks of the same size will fit into the height
-        numBlocksHigh = screenY / blockSize;
+        numBlocksHigh = sY / snakeSize;
 
         // Initialize the drawing objects
         surfaceHolder = getHolder();
         paint = new Paint();
 
         // If you Score 200 you are rewarded with a crash achievement!
-        snakeXs = new int[200];
-        snakeYs = new int[200];
+        snkXs = new int[200];
+        snkYs = new int[200];
 
         // Start the game
         newGame();
@@ -145,13 +135,13 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
     public void newGame() {
         // Start with a single snake segment
-        snakeLength = 1;
-        snakeXs[0] = NUM_BLOCKS_WIDE / 2;
-        snakeYs[0] = numBlocksHigh / 2;
-        MILLIS_PER_SECOND = 10000;
+        snkLght = 1;
+        snkXs[0] = NUM_BLOCKS_WIDE / 2;
+        snkYs[0] = numBlocksHigh / 2;
+        MILLIS_PER_SECOND = 1000;
 
         // Get Bob ready for dinner
-        spawnBob();
+        spwnApple();
 
         // Reset the Score
         score = 0;
@@ -160,35 +150,35 @@ class SnakeEngine extends SurfaceView implements Runnable {
         nextFrameTime = System.currentTimeMillis();
     }
 
-    public void spawnBob() {
+    public void spwnApple() {
         Random random = new Random();
-        bobX = random.nextInt(NUM_BLOCKS_WIDE - 1) + 1;
-        bobY = random.nextInt(numBlocksHigh - 1) + 1;
+        appleX = random.nextInt(NUM_BLOCKS_WIDE - 1) + 1;
+        appleY = random.nextInt(numBlocksHigh - 1) + 1;
     }
 
-    public void eatBob() {
+    public void eatApple() {
 
 
         // Increase the size of the snake
-        snakeLength++;
+        snkLght++;
         //vibrate short
         VibrClass.vibrateBob(getContext());
 
         //replace Bob
-        spawnBob();
+        spwnApple();
         //add to the Score
         score = score + 1;
-        MILLIS_PER_SECOND = MILLIS_PER_SECOND - 200;
+        MILLIS_PER_SECOND = MILLIS_PER_SECOND -30;
 
     }
 
     private void moveSnake(){
         // Move the body
-        for (int i = snakeLength; i > 0; i--) {
+        for (int i = snkLght; i > 0; i--) {
             // Start at the back and move it
             // to the position of the segment in front of it
-            snakeXs[i] = snakeXs[i - 1];
-            snakeYs[i] = snakeYs[i - 1];
+            snkXs[i] = snkXs[i - 1];
+            snkYs[i] = snkYs[i - 1];
 
             // Exclude the head because
             // the head has nothing in front of it
@@ -197,36 +187,36 @@ class SnakeEngine extends SurfaceView implements Runnable {
         // Move the head in the appropriate heading
         switch (heading) {
             case UP:
-                snakeYs[0]--;
+                snkYs[0]--;
                 break;
 
             case RIGHT:
-                snakeXs[0]++;
+                snkXs[0]++;
                 break;
 
             case DOWN:
-                snakeYs[0]++;
+                snkYs[0]++;
                 break;
 
             case LEFT:
-                snakeXs[0]--;
+                snkXs[0]--;
                 break;
         }
     }
 
-    boolean detectDeath(){
+    boolean ifDead(){
         // Has the snake died?
         boolean dead = false;
 
         // Hit the screen edge
-        if (snakeXs[0] == -1) dead = true;
-        if (snakeXs[0] >= NUM_BLOCKS_WIDE) dead = true;
-        if (snakeYs[0] == -1) dead = true;
-        if (snakeYs[0] == numBlocksHigh) dead = true;
+        if (snkXs[0] == -1) dead = true;
+        if (snkXs[0] >= NUM_BLOCKS_WIDE) dead = true;
+        if (snkYs[0] == -1) dead = true;
+        if (snkYs[0] == numBlocksHigh) dead = true;
 
         // Eaten itself?
-        for (int i = snakeLength - 1; i > 0; i--) {
-            if ((i > 4) && (snakeXs[0] == snakeXs[i]) && (snakeYs[0] == snakeYs[i])) {
+        for (int i = snkLght - 1; i > 0; i--) {
+            if ((i > 4) && (snkXs[0] == snkXs[i]) && (snkYs[0] == snkYs[i])) {
                 dead = true;
 
             }
@@ -238,13 +228,13 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
     public void update() {
         // Did the head of the snake eat Bob?
-        if (snakeXs[0] == bobX && snakeYs[0] == bobY) {
-            eatBob();
+        if (snkXs[0] == appleX && snkYs[0] == appleY) {
+            eatApple();
         }
 
         moveSnake();
 
-        if (detectDeath()) {
+        if (ifDead()) {
 
             Intent i = new Intent().setClass(getContext(), Score.class);
             (getContext()).startActivity(i);
@@ -268,22 +258,22 @@ class SnakeEngine extends SurfaceView implements Runnable {
             canvas.drawText("Score:" + score, 10, 70, paint);
 
             // Draw the snake one block at a time
-            for (int i = 0; i < snakeLength; i++) {
-                canvas.drawRect(snakeXs[i] * blockSize,
-                        (snakeYs[i] * blockSize),
-                        (snakeXs[i] * blockSize) + blockSize,
-                        (snakeYs[i] * blockSize) + blockSize,
+            for (int i = 0; i < snkLght; i++) {
+                canvas.drawRect(snkXs[i] * snakeSize,
+                        (snkYs[i] * snakeSize),
+                        (snkXs[i] * snakeSize) + snakeSize,
+                        (snkYs[i] * snakeSize) + snakeSize,
                         paint);
             }
 
-            // Set the color of the paint to draw Bob red
+            // Set the color of the paint to draw apple red
             paint.setColor(Color.RED);
 
-            // Draw Bob
-            canvas.drawRect(bobX * blockSize,
-                    (bobY * blockSize),
-                    (bobX * blockSize) + blockSize,
-                    (bobY * blockSize) + blockSize,
+            // Draw apple
+            canvas.drawRect(appleX * snakeSize,
+                    (appleY * snakeSize),
+                    (appleX * snakeSize) + snakeSize,
+                    (appleY * snakeSize) + snakeSize,
                     paint);
 
             // Unlock the canvas and reveal the graphics for this frame
@@ -313,7 +303,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_UP:
-                if (motionEvent.getX() >= screenX / 2) {
+                if (motionEvent.getX() >= sX / 2) {
                     switch(heading){
                         case UP:
                             heading = Heading.RIGHT;

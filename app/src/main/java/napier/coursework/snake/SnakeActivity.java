@@ -13,20 +13,12 @@ public class SnakeActivity extends Activity {
     SnakeEngine snakeEngine;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         // Get the pixel dimensions of the screen
         Display display = getWindowManager().getDefaultDisplay();
-
-
-        //vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        //vibrator.vibrate(50);
 
         // Initialize the result into a Point object
         Point size = new Point();
@@ -37,10 +29,6 @@ public class SnakeActivity extends Activity {
 
         // Make snakeEngine the view of the Activity
         setContentView(snakeEngine);
-
-
-
-
     }
 
 
@@ -58,7 +46,7 @@ public class SnakeActivity extends Activity {
         super.onPause();
         snakeEngine.pause();
     }
-
+    // Override the back button to go to the MainMenu
     @Override
     public void onBackPressed() {
         Intent snake = new Intent(SnakeActivity.this, MainActivity.class);
