@@ -3,22 +3,24 @@ package napier.coursework.snake;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
 import java.util.Random;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 
 
-class SnakeGame extends SurfaceView implements Runnable {
+class SnakeHard extends SurfaceView implements Runnable {
 
-    // Our game thread for the main game loop
+    //Game thread declaration
     private Thread thread = null;
 
     // For tracking movement Heading
+    //
     public enum Heading {UP, RIGHT, DOWN, LEFT}
 
     // Start by heading to the right
@@ -75,7 +77,7 @@ class SnakeGame extends SurfaceView implements Runnable {
     // Some paint for our canvas
     private Paint paint;
 
-    public SnakeGame(Context context, Point size) {
+    public SnakeHard(Context context, Point size) {
         super(context);
 
 

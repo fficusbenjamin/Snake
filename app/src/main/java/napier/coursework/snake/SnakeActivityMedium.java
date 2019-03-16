@@ -7,10 +7,10 @@ import android.os.Bundle;
 import android.view.Display;
 
 
-public class SnakeActivity extends Activity {
+public class SnakeActivityMedium extends Activity {
 
     // Declare an instance of SnakeGame
-    SnakeGame snakeGame;
+    SnakeMedium snakeMedium;
 
 
     @Override
@@ -25,10 +25,10 @@ public class SnakeActivity extends Activity {
         display.getSize(size);
 
         // Create a new instance of the SnakeGame class
-        snakeGame = new SnakeGame(this, size);
+        snakeMedium = new SnakeMedium(this, size);
 
         // Make snakeGame the view of the Activity
-        setContentView(snakeGame);
+        setContentView(snakeMedium);
     }
 
 
@@ -37,20 +37,20 @@ public class SnakeActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        snakeGame.resume();
+        snakeMedium.resume();
     }
 
     // Stop the thread in snakeGame
     @Override
     protected void onPause() {
         super.onPause();
-        snakeGame.pause();
+        snakeMedium.pause();
     }
     // Override the back button to go to the MainMenuF
     @Override
     public void onBackPressed() {
-        Intent snake = new Intent(SnakeActivity.this, MainActivity.class);
-        startActivity(snake);
+        Intent snakeMedium = new Intent(SnakeActivityMedium.this, MainActivity.class);
+        startActivity(snakeMedium);
     }
 
 

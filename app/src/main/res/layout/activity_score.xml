@@ -40,11 +40,12 @@
         android:layout_marginTop="80dp"
         android:text="Try Again"
         android:textAllCaps="false"
-        android:onClick="tryAgain"
+
         android:background="@drawable/btn_rounded"
         android:textSize="25dp"
         android:layout_width="240dp"
         android:layout_height="80dp"
+        android:id="@+id/tryAgain"
 
 
         />
