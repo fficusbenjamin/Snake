@@ -18,12 +18,28 @@
         android:textSize="50dp" />
 
     <TextView
-        android:id="@+id/scoreLabel"
+        android:id="@+id/easyScoreLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Last Game Score: 150"
-        android:textSize="30sp"
-        android:layout_marginTop="80dp"
+        android:text="Last Easy Game Score: 150"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:textColor="#007358"/>
+    <TextView
+        android:id="@+id/mediumScoreLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Medium Game Score: 150"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:textColor="#007358"/>
+    <TextView
+        android:id="@+id/hardScoreLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Hard Game Score: 150"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
         android:textColor="#007358"/>
 
     <TextView
@@ -32,12 +48,12 @@
         android:layout_height="wrap_content"
         android:text="High Score: 300"
         android:textSize="30sp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="70dp"
         android:textColor="#007358"/>
 
     <Button
 
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="70dp"
         android:text="Try Again"
         android:textAllCaps="false"
 
@@ -53,7 +69,7 @@
 
     <Button
 
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="70dp"
         android:text="Main Menu"
         android:textAllCaps="false"
         android:onClick="mainMenu"

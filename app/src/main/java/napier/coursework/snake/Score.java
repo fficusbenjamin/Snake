@@ -20,7 +20,9 @@ public class Score extends AppCompatActivity {
         setContentView(R.layout.activity_score);
 
 
-        TextView scoreLabel = findViewById(R.id.scoreLabel);
+        TextView EasyScoreLabel = findViewById(R.id.easyScoreLabel);
+        TextView MediumScoreLabel = findViewById(R.id.mediumScoreLabel);
+        TextView HardScoreLabel = findViewById(R.id.hardScoreLabel);
         TextView highScoreLabel = findViewById(R.id.highScoreLabel);
 
         int scoreEasy = SnakeEasy.getPlayerScore();
@@ -28,21 +30,38 @@ public class Score extends AppCompatActivity {
         int scoreHard = SnakeHard.getPlayerScore();
 
 
-        scoreLabel.setText("Latest Game Score: "+score);
+        EasyScoreLabel.setText("Latest Easy Game Score: "+scoreEasy);
+        MediumScoreLabel.setText("Latest Medium Game Score: "+scoreMedium);
+        HardScoreLabel.setText("Latest Hard Game Score: "+scoreHard);
 
         SharedPreferences settings = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
         int highScore = settings.getInt("HIGH_SCORE", 0);
 
-            if (score > highScore) {
-                highScoreLabel.setText("High Score: " + score);
+            if (scoreEasy > highScore) {
+                highScoreLabel.setText("High Score: " + scoreEasy);
 
                 //save
                 SharedPreferences.Editor editor = settings.edit();
-                editor.putInt("HIGH_SCORE", score);
+                editor.putInt("HIGH_SCORE", scoreEasy);
                 editor.commit();
-            } else {
+            } else if (scoreMedium > highScore) {
+                highScoreLabel.setText("High Score: " + scoreMedium);
+
+                //save
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putInt("HIGH_SCORE", scoreMedium);
+                editor.commit();
+            } else if (scoreHard > highScore) {
+                highScoreLabel.setText("High Score: " + scoreHard);
+
+                //save
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putInt("HIGH_SCORE", scoreHard);
+                editor.commit();
+            }else {
                 highScoreLabel.setText("High Score: " + highScore);
             }
+
 
 
 
@@ -81,13 +100,7 @@ public class Score extends AppCompatActivity {
 
             }
         });
-
-
-
     }
-
-
-
 
 
     public void mainMenu(View view){
