@@ -19,10 +19,10 @@ public class Score extends AppCompatActivity {
         TextView scoreLabel = findViewById(R.id.scoreLabel);
         TextView highScoreLabel = findViewById(R.id.highScoreLabel);
 
-        int score = SnakeGame.getPlayerScore(); //getIntent().getIntExtra("SCORE", 0);
+        int score = SnakeGame.getPlayerScore();
         scoreLabel.setText("Latest Game Score: "+score);
 
-        SharedPreferences settings = getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
         int highScore = settings.getInt("HIGH_SCORE", 0);
 
             if (score > highScore) {
@@ -35,7 +35,6 @@ public class Score extends AppCompatActivity {
             } else {
                 highScoreLabel.setText("High Score: " + highScore);
             }
-
     }
 
     public void tryAgain(View view){

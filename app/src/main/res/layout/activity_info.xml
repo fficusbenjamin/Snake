@@ -23,6 +23,7 @@
         android:layout_marginBottom="20dp"/>
 
 
+
     <TextView
         android:id="@+id/appInfo"
         android:layout_width="match_parent"
@@ -33,6 +34,7 @@
         android:textSize="19sp"
         app:layout_constraintBottom_toTopOf="@+id/me"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
@@ -51,7 +53,7 @@
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appInfo"
-        app:srcCompat="@drawable/me" />
+        app:srcCompat="@drawable/me"/>
 
     <TextView
         android:id="@+id/name"
@@ -69,8 +71,7 @@
         app:layout_constraintBottom_toTopOf="@+id/mail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/me"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/me"/>
 
     <TextView
         android:id="@+id/mail"
@@ -89,7 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/name"/>
 
 
 
