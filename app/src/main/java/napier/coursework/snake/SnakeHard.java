@@ -10,183 +10,202 @@ import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
 import java.util.Random;
+
+
+///----------------------------------------------------------------------
+///   Class:          SnakeHard (Class)
+///   Description:    This is the actual game, the class draws the screen
+///                   with a background and updates the movement of the
+///                   snake for the hard game
+///   Author:         Francesco Fico (40404272)     Date: 03/2019
+///----------------------------------------------------------------------
 
 
 class SnakeHard extends SurfaceView implements Runnable {
 
-    //Game thread declaration
+    //declaration of new game thread
     private Thread thread = null;
 
-    // For tracking movement Heading
-    //
+    //new heading for the movements
     public enum Heading {UP, RIGHT, DOWN, LEFT}
 
-    // Start by heading to the right
+    //the snake starts heading to the right
     private Heading heading = Heading.RIGHT;
 
-    // To hold the screen size in pixels
+    //declaration of the variables that stores the screen axis
     private int sX;
     private int sY;
 
-    // How long is the snake
+    //declaration of the variables that will store the snake lenght
     private int snkLght;
 
-    // Where is Bob hiding?
+    //declaration of the axis for the position of the apple
     private int appleX;
     private int appleY;
 
-    // The size in pixels of a snake segment
+    //declaration of the snake size in pixel for the segment
     private int snakeSize;
 
-    // The size in segments of the playable area
+    //size in segment of the playable area
     private final int NUM_BLOCKS_WIDE = 40;
     private int numBlocksHigh;
 
-    // Control pausing between updates
+    //control pausing between updates
     private long nextFrameTime;
-    // Update the game 60 times per second
-    private final long FPS = 10;
-    // There are 1000 milliseconds in a second
-    private long MILLIS_PER_SECOND = 1000;
-    // We will draw the frame much more often
 
-    // How many points does the player have
+    //update the game 10 times per second (this is the hard mode, very slow)
+    private final long FPS = 10;
+
+    //there are 1000 milliseconds in a second
+    private long MILLIS_PER_SECOND = 1000;
+
+    //this int stores the player score
     private static int score;
 
+    //this method returns the player score to other activities
     public static int getPlayerScore(){
         return score;
     }
 
-
-    // The location in the grid of all the segments
+    //the location in the grid of all the segments
     private int[] snkXs;
     private int[] snkYs;
 
-    // Everything we need for drawing
-    // Is the game currently playing?
+    //boolean that stores the current state of the game
     private volatile boolean isPlaying;
 
-    // A canvas for our paint
+    //canvas for our drawing
     private Canvas canvas;
 
-    // Required to use canvas
+    //required to use canvas
     private SurfaceHolder surfaceHolder;
 
-    // Some paint for our canvas
+    //paint for our drawing
     private Paint paint;
 
+    //method that starts the game
     public SnakeHard(Context context, Point size) {
         super(context);
 
-
-
-
-        //context = context;
-
+        //returns the dimension of the screen
         sX = size.x;
         sY = size.y;
 
-        // Work out how many pixels each block is
+        //work out how many pixels each block is
         snakeSize = sX / NUM_BLOCKS_WIDE;
-        // How many blocks of the same size will fit into the height
+
+        //how many blocks of the same size will fit into the height
         numBlocksHigh = sY / snakeSize;
 
-        // Initialize the drawing objects
+        //initialize the drawing objects
         surfaceHolder = getHolder();
         paint = new Paint();
 
-        // If you Score 200 you are rewarded with a crash achievement!
+        //maximum snake dimension (higher than that the game will simply crash)
         snkXs = new int[200];
         snkYs = new int[200];
 
         // Start the game
         newGame();
-
     }
 
+    //override the thread run method
     @Override
     public void run() {
 
+        //while isPlaying is true
         while (isPlaying) {
+
             // Update 10 times a second
             if(updateRequired()) {
                 update();
                 draw();
-
             }
         }
     }
 
-
+    //method that pauses the thread
     public void pause() {
         isPlaying = false;
         try {
             thread.join();
         } catch (InterruptedException e) {
-            // Error
+            //error
         }
     }
 
+    //method that resume the thread
     public void resume() {
         isPlaying = true;
         thread = new Thread(this);
         thread.start();
     }
 
+    //method that creates a new game
     public void newGame() {
-        // Start with a single snake segment
+
+        //start with a single snake segment
         snkLght = 1;
         snkXs[0] = NUM_BLOCKS_WIDE / 2;
         snkYs[0] = numBlocksHigh / 2;
+
+        //reset the velocity
         MILLIS_PER_SECOND = 1000;
 
-        // Get Bob ready for dinner
+        //draws the apple
         spwnApple();
 
-        // Reset the Score
+        //reset the Score
         score = 0;
 
-        // Setup nextFrameTime so an update is triggered
+        //setup nextFrameTime so an update is triggered
         nextFrameTime = System.currentTimeMillis();
     }
 
+    //method that spawn the apple
     public void spwnApple() {
+
+        //declare a new random object
         Random random = new Random();
+
+        //set the apple coordinate randomly
         appleX = random.nextInt(NUM_BLOCKS_WIDE - 1) + 1;
         appleY = random.nextInt(numBlocksHigh - 1) + 1;
     }
 
+    //method that modify the snake when the apple is eat
     public void eatApple() {
 
-
-        // Increase the size of the snake
+        //increase the size of the snake by one
         snkLght++;
+
         //vibrate short
         VibrClass.vibrateBob(getContext());
 
-        //replace Bob
+        //replace apple
         spwnApple();
+
         //add to the Score
         score = score + 1;
-        MILLIS_PER_SECOND = MILLIS_PER_SECOND -30;
 
+        //increment the velocity of the snake
+        MILLIS_PER_SECOND = MILLIS_PER_SECOND -30;
     }
 
+    //method that move the snake on the screen
     private void moveSnake(){
-        // Move the body
+
+        //for loop that moves the body
         for (int i = snkLght; i > 0; i--) {
-            // Start at the back and move it
-            // to the position of the segment in front of it
+
+            //start at the back and move to the position of the segment in front of it
+            //exclude the head because the head has nothing in front of it
             snkXs[i] = snkXs[i - 1];
             snkYs[i] = snkYs[i - 1];
-
-            // Exclude the head because
-            // the head has nothing in front of it
         }
 
-        // Move the head in the appropriate heading
+        //move the head in the appropriate heading
         switch (heading) {
             case UP:
                 snkYs[0]--;
@@ -206,60 +225,67 @@ class SnakeHard extends SurfaceView implements Runnable {
         }
     }
 
+    //method that determines if the snake died
     boolean ifDead(){
-        // Has the snake died?
+
+        //boolean set as false
         boolean dead = false;
 
-        // Hit the screen edge
+        //hit the screen edge
         if (snkXs[0] == -1) dead = true;
         if (snkXs[0] >= NUM_BLOCKS_WIDE) dead = true;
         if (snkYs[0] == -1) dead = true;
         if (snkYs[0] == numBlocksHigh) dead = true;
 
-        // Eaten itself?
+        //eaten itself?
         for (int i = snkLght - 1; i > 0; i--) {
             if ((i > 4) && (snkXs[0] == snkXs[i]) && (snkYs[0] == snkYs[i])) {
                 dead = true;
-
             }
         }
-
         return dead;
-
     }
 
+    //method that updates the thread
     public void update() {
-        // Did the head of the snake eat Bob?
+
+        //did the head of the snake eat apple?
         if (snkXs[0] == appleX && snkYs[0] == appleY) {
             eatApple();
         }
 
         moveSnake();
 
+        //did the snake die?
         if (ifDead()) {
 
+            //long vibrate for the death
+            VibrClass.vibrateDeath(getContext());
+
+            //start the activity too see the score
             Intent i = new Intent().setClass(getContext(), Score.class);
             (getContext()).startActivity(i);
-            VibrClass.vibrateDeath(getContext());
         }
     }
 
+    //method that draw the canvas
     public void draw() {
-        // Get a lock on the canvas
+
+        //get a lock on the canvas
         if (surfaceHolder.getSurface().isValid()) {
             canvas = surfaceHolder.lockCanvas();
 
-            // Fill the screen with black background to save battery on amoled screen and enrich the contrast
+            //fill the screen with black background to save battery on amoled screen and enrich the contrast
             canvas.drawColor(Color.BLACK);
 
-            // Set the color of the paint to draw the snake green #007358
+            //set the color of the paint to draw the snake green #007358
             paint.setColor(Color.argb(255,0,115,88));
 
-            // Scale the HUD text
+            //scale the on screen score text
             paint.setTextSize(100);
             canvas.drawText("Score:" + score, 10, 70, paint);
 
-            // Draw the snake one block at a time
+            //draw the snake one block at a time
             for (int i = 0; i < snkLght; i++) {
                 canvas.drawRect(snkXs[i] * snakeSize,
                         (snkYs[i] * snakeSize),
@@ -268,38 +294,37 @@ class SnakeHard extends SurfaceView implements Runnable {
                         paint);
             }
 
-            // Set the color of the paint to draw apple red
+            //set the color to draw the apple red
             paint.setColor(Color.RED);
 
-            // Draw apple
+            //draws apple
             canvas.drawRect(appleX * snakeSize,
                     (appleY * snakeSize),
                     (appleX * snakeSize) + snakeSize,
                     (appleY * snakeSize) + snakeSize,
                     paint);
 
-            // Unlock the canvas and reveal the graphics for this frame
+            //unlock the canvas and reveal the graphics for this frame
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
     }
 
+    //method that determines if an updates is required
     public boolean updateRequired() {
 
-        // Are we due to update the frame
+        //if the set time has passed
         if(nextFrameTime <= System.currentTimeMillis()){
-            // Tenth of a second has passed
 
-            // Setup when the next update will be triggered
+            //setup when the next update will be triggered
             nextFrameTime =System.currentTimeMillis() + MILLIS_PER_SECOND / FPS;
 
-            // Return true so that the update and draw
-            // functions are executed
+            //return true so that the update and draw functions are executed
             return true;
         }
-
         return false;
     }
 
+    //method that override the touch event on the canvas
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
 
