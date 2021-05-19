@@ -1,3 +1,3 @@
 # Snake Game
 
-Snake game Android application developed in Java.
+Snake Android game developed in Java.
